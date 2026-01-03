@@ -1,13 +1,14 @@
 import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
+import io
 from core.engine import ReconstructionEngine
 
 # --- PAGE CONFIGURATION ---
 st.set_page_config(page_title="DSP Reconstruction Lab", layout="wide")
 
 # --- APP TITLE & DESCRIPTION ---
-st.title("🔬 Signal Reconstruction Analysis Lab")
+st.title("📡 Signal Reconstruction Analysis Lab")
 st.markdown("""
 This application demonstrates how a continuous signal is reconstructed from discrete samples 
 using **Zero-Order Hold (ZOH)** and **Sinc Interpolation**.
@@ -109,6 +110,59 @@ psd_ax2.grid(True)
 
 plt.tight_layout()
 st.pyplot(fig2)
+buf = io.BytesIO()
+fig1.savefig(buf, format="png", bbox_inches='tight')
+st.download_button(
+    label="💾 Download Master Plot as PNG",
+    data=buf.getvalue(),
+    file_name="time_domain_reconstruction.png",
+    mime="image/png"
+)
 
+# Repeat for the PSD Plot (fig2)
+buf_psd = io.BytesIO()
+fig2.savefig(buf_psd, format="png", bbox_inches='tight')
+st.download_button(
+    label="📊 Download PSD Analysis as PNG",
+    data=buf_psd.getvalue(),
+    file_name="frequency_domain_analysis.png",
+    mime="image/png"
+)
 
+# --- PHASE 5: THEORY & ANALYSIS ---
+st.divider()
+st.header("3. Engineering Analysis & Conclusion")
 
+col1, col2 = st.columns(2)
+
+with col1:
+    st.subheader("Time-Domain Insights")
+    st.info("""
+    **Why the staircase?**  
+    The **ZOH (Blue)** reconstruction is a 'sample-and-hold' process. It creates a staircase because it maintains the voltage of a sample until the next clock cycle. This is computationally 'free' but mathematically 'dirty'.
+    
+    **Why the smooth curve?**  
+    **Sinc (Green)** interpolation uses the *Whittaker-Shannon Formula*. It assumes the signal is band-limited and fills the gaps with perfect low-pass filtering. Notice how it tracks the 'Analog' line almost perfectly if Nyquist is met.
+    """)
+
+with col2:
+    st.subheader("Frequency-Domain Insights")
+    st.warning("""
+    **Spectral Images in ZOH:**  
+    In the Blue PSD, notice the 'bumps' at higher frequencies. These are **Spectral Images** caused by the sharp edges of the staircase. Sharp edges in time = broad frequencies in space.
+    
+    **The Brick-Wall Filter:**  
+    In the Green PSD, the high frequencies are suppressed. The Sinc function acts as an **Ideal Low-Pass Filter**, effectively 'smoothing' out the noise and recovering only the original signal frequency.
+    """)
+
+# --- FINAL CONCLUSION FOR THE REPORT ---
+with st.expander("📝 View Project Conclusion (Copy for Report)"):
+    st.write(f"""
+    ### Final Conclusion
+    Based on our analysis of a {f_signal}Hz signal sampled at {fs_digital}Hz:
+    
+    1. **Accuracy:** Sinc interpolation provides superior reconstruction accuracy in the time domain compared to ZOH, which introduces a visible 'staircase' error.
+    2. **Spectral Purity:** The Frequency-Domain analysis confirms that ZOH reconstruction suffers from high-frequency harmonic distortion (spectral images). Sinc interpolation significantly attenuates these images, acting as a brick-wall low-pass filter.
+    3. **The Nyquist Limit:** When $f_s < 2f$, both methods fail due to **Aliasing**, where high frequencies fold back into the baseband, making the original signal unrecoverable.
+    4. **Practicality:** While Sinc is mathematically ideal, it is 'acausal' (requires future samples) and computationally expensive. ZOH remains the standard for initial DAC stages due to its hardware simplicity.
+    """)
