@@ -1,0 +1,14 @@
+# Virtual Environment
+venv/
+.env
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Plot exports (we want users to generate their own)
+plots/*.png
