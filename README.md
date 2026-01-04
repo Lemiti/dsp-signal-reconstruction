@@ -11,6 +11,7 @@ This project was developed as a collaborative effort by:
 * **Atsedemariam  Asemaraw**
 * **Bamlak Tadesse**
 * **Eyosias Tiruneh**
+* **Kenna Baye**
 * **Lemi Negeso**
 
 ---
@@ -93,8 +94,9 @@ streamlit run app.py
 ---
 
 ## 📊 Analysis Examples
-*(Tip: Replace these placeholders with your exported PNGs from the app)*
-![[plots/time_domain_reconstruction_50Hz.png|400]]  ![[plots/frequency_domain_analysis_25Hz.png|400]] ![[plots/time_domain_reconstruction_15Hz.png|600]]
+![alt txt](https://github.com/Lemiti/dsp-signal-reconstruction/tree/main/plots/time_domain_reconstruction_50Hz.png)
+![unable to render plots/frequency_domain_analysis_25Hz.png](https://github.com/Lemiti/dsp-signal-reconstruction/tree/main/plots/frequency_domain_analysis_25Hz.png)
+![unable to render plots/time_domain_reconstruction_15Hz.png](https://github.com/Lemiti/dsp-signal-reconstruction/tree/main/plots/time_domain_reconstruction_15Hz.png)
 
 | Scenario | Observation |
 | :--- | :--- |
@@ -105,13 +107,6 @@ streamlit run app.py
 ---
 
 ## 📜 Acknowledgments
-Developed for the **DSP** Mini-Project. Special thanks to our instructor **Ms. Yiwab** for inspiration on giving this project.
+Developed for the **DSP(Digital Signal Prosessing)** Mini-Project. Special thanks to our instructor **Ms. Yiwab** for inspiration on giving this project and for her interactive lecture.
 
 ***
-
-### Senior Architect's Final Checklist for you:
-*   [ ] **GIF/Image:** Ensure you add at least one screenshot of the app to the "Analysis Examples" section.
-*   [ ] **License:** I included an MIT license badge. If you don't have a license file yet, you can add one easily through GitHub's UI.
-*   [ ] **GitHub Links:** Update the clone URL once your repo is live.
-
-**Congratulations, Team!** This is a project you should all be very proud to show off. Ready to push to GitHub?
