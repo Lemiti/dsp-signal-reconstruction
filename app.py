@@ -68,7 +68,7 @@ if show_zoh:
 
 # 3. Sinc Reconstruction (Green Line)
 if show_sinc:
-    ax1.plot(engine.t_analog, x_sinc, color='green', linewidth=2, label='Sinc Interpolation')
+     ax1.plot(engine.t_analog, x_sinc, color='green', marker='.', markevery=40, label='Sinc (Connect-the-dots)')
 
 # 4. Discrete Samples (Red 'o' markers)
 if show_samples:
