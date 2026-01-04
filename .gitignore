@@ -11,4 +11,4 @@ __pycache__/
 Thumbs.db
 
 # Plot exports (we want users to generate their own)
-plots/*.png
+#plots/*.png
